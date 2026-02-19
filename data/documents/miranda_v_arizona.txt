@@ -1,0 +1,46 @@
+SUPREME COURT OF THE UNITED STATES
+
+Miranda v. Arizona, 384 U.S. 436 (1966)
+
+June 13, 1966
+
+OPINION
+
+Chief Justice Warren delivered the opinion of the Court.
+
+The cases before us raise questions which go to the roots of our concepts of American criminal jurisprudence: the restraints society must observe consistent with the Federal Constitution in prosecuting individuals for crime.
+
+FACTS
+
+On March 13, 1963, petitioner Ernesto Miranda was arrested at his home and taken in custody to a Phoenix police station. He was there identified by the complaining witness. The police then took him to "Interrogation Room No. 2" of the detective bureau. There he was questioned by two police officers. The officers admitted at trial that Miranda was not advised that he had a right to have an attorney present.
+
+Two hours later, the officers emerged from the interrogation room with a written confession signed by Miranda. At the top of the statement was a typed paragraph stating that the confession was made voluntarily, without threats or promises of immunity and "with full knowledge of my legal rights, understanding any statement I make may be used against me."
+
+ANALYSIS
+
+We deal with the admissibility of statements obtained from an individual who is subjected to custodial police interrogation and the necessity for procedures which assure that the individual is accorded his privilege under the Fifth Amendment to the Constitution not to be compelled to incriminate himself.
+
+The prosecution may not use statements, whether exculpatory or inculpatory, stemming from custodial interrogation of the defendant unless it demonstrates the use of procedural safeguards effective to secure the privilege against self-incrimination.
+
+Prior to any questioning, the person must be warned that he has a right to remain silent, that any statement he does make may be used as evidence against him, and that he has a right to the presence of an attorney, either retained or appointed.
+
+HOLDING
+
+We hold that when an individual is taken into custody or otherwise deprived of his freedom by the authorities in any significant way and is subjected to questioning, the privilege against self-incrimination is jeopardized. Procedural safeguards must be employed to protect the privilege.
+
+The defendant may waive effectuation of these rights, provided the waiver is made voluntarily, knowingly and intelligently. If, however, he indicates in any manner and at any stage of the process that he wishes to consult with an attorney before speaking there can be no questioning.
+
+CONCLUSION
+
+The judgment of the Supreme Court of Arizona is reversed. The case is remanded for further proceedings not inconsistent with this opinion.
+
+It is so ordered.
+
+---
+
+Citations referenced in this opinion:
+
+Escobedo v. Illinois, 378 U.S. 478 (1964)
+Malloy v. Hogan, 378 U.S. 1 (1964)
+Massiah v. United States, 377 U.S. 201 (1964)
+Gideon v. Wainwright, 372 U.S. 335 (1963)
