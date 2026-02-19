@@ -21,11 +21,11 @@ components = {}
 def get_components():
     """Initialize or return RAG components."""
     if not components:
-        from src.document_processor import LegalDocumentProcessor, LegalChunker
-        from src.vector_store import ChromaVectorStore
-        from src.compression import LLMLinguaCompressor
-        from src.rag_engine import LegalRAGEngine
-        from src.config import config
+        from legal_rag.core.legal_document_processor import LegalDocumentProcessor, LegalChunker
+        from legal_rag.core.chroma_store import ChromaVectorStore
+        from legal_rag.core.llmlingua_compressor import LLMLinguaCompressor
+        from legal_rag.core.legal_rag import LegalRAGEngine
+        from legal_rag.core.config import config
 
         processor = LegalDocumentProcessor()
         chunker = LegalChunker(
@@ -41,7 +41,7 @@ def get_components():
         try:
             compressor = LLMLinguaCompressor(target_ratio=config.compression_ratio)
         except Exception:
-            from src.compression.llmlingua_compressor import SimpleFallbackCompressor
+            from legal_rag.core.llmlingua_compressor import SimpleFallbackCompressor
             compressor = SimpleFallbackCompressor(target_ratio=config.compression_ratio)
 
         rag_engine = LegalRAGEngine(
@@ -77,7 +77,9 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="Legal Document RAG", lifespan=lifespan)
 
 # Serve static files
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# Get the web directory path
+WEB_DIR = Path(__file__).parent.parent / "web"
+app.mount("/static", StaticFiles(directory=WEB_DIR), name="static")
 
 
 class QueryRequest(BaseModel):
@@ -93,7 +95,7 @@ class QueryResponse(BaseModel):
 @app.get("/", response_class=HTMLResponse)
 async def root():
     """Serve the main HTML page."""
-    html_content = Path("static/index.html").read_text(encoding="utf-8")
+    html_content = (WEB_DIR / "index.html").read_text(encoding="utf-8")
     return HTMLResponse(content=html_content)
 
 

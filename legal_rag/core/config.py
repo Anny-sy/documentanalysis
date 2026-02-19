@@ -35,8 +35,8 @@ class Config:
     top_k: int = int(os.getenv("TOP_K", "10"))
     rerank_top_k: int = int(os.getenv("RERANK_TOP_K", "5"))
     
-    # Paths
-    base_dir: Path = Path(__file__).parent.parent
+    # Paths - Project root is 2 levels up from config (legal_rag/core/ -> legal_rag/ -> root)
+    base_dir: Path = Path(__file__).parent.parent.parent
     documents_dir: Path = base_dir / "data" / "documents"
     
     def validate(self) -> bool:

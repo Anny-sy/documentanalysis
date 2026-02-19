@@ -1,15 +1,10 @@
 """
-Legal Document RAG System with Compressed Prompts
-
-A production-ready RAG system for analyzing legal documents using:
-- ChromaDB for vector storage
-- LLMLingua for prompt compression
-- OpenAI GPT-4 for generation
+Legal Document RAG System - CLI Interface
 
 Usage:
-    python main.py ingest ./documents          # Ingest documents
-    python main.py query "What is the holding?" # Query the system
-    python main.py interactive                  # Interactive mode
+    python -m legal_rag.cli ingest ./documents
+    python -m legal_rag.cli query "What is the holding?"
+    python -m legal_rag.cli interactive
 """
 
 import sys
@@ -29,11 +24,11 @@ console = Console()
 
 def create_components():
     """Create and return RAG system components."""
-    from src.document_processor import LegalDocumentProcessor, LegalChunker
-    from src.vector_store import ChromaVectorStore
-    from src.compression import LLMLinguaCompressor
-    from src.rag_engine import LegalRAGEngine
-    from src.config import config
+    from legal_rag.core.legal_document_processor import LegalDocumentProcessor, LegalChunker
+    from legal_rag.core.chroma_store import ChromaVectorStore
+    from legal_rag.core.llmlingua_compressor import LLMLinguaCompressor
+    from legal_rag.core.legal_rag import LegalRAGEngine
+    from legal_rag.core.config import config
     
     # Initialize components
     processor = LegalDocumentProcessor()
@@ -55,7 +50,7 @@ def create_components():
     except Exception as e:
         console.print(f"[yellow]LLMLingua not available: {e}[/yellow]")
         console.print("[yellow]Using fallback compression[/yellow]")
-        from src.compression.llmlingua_compressor import SimpleFallbackCompressor
+        from legal_rag.core.llmlingua_compressor import SimpleFallbackCompressor
         compressor = SimpleFallbackCompressor(target_ratio=config.compression_ratio)
     
     rag_engine = LegalRAGEngine(
@@ -224,10 +219,10 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python main.py ingest ./data/documents
-  python main.py query "What was the court's holding in Brown v. Board?"
-  python main.py interactive
-  python main.py stats
+  python -m legal_rag.cli ingest ./data/documents
+  python -m legal_rag.cli query "What was the court's holding in Brown v. Board?"
+  python -m legal_rag.cli interactive
+  python -m legal_rag.cli stats
         """
     )
     
