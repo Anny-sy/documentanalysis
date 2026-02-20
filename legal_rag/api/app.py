@@ -25,7 +25,7 @@ def get_components():
         from legal_rag.core.legal_document_processor import LegalDocumentProcessor, LegalChunker
         from legal_rag.core.chroma_store import ChromaVectorStore
         from legal_rag.core.llmlingua_compressor import LLMLinguaCompressor
-        from legal_rag.core.legal_rag import LegalRAGEngine
+        from legal_rag.core.hf_rag import HFLegalRAGEngine
         from legal_rag.core.config import config
 
         processor = LegalDocumentProcessor()
@@ -45,11 +45,12 @@ def get_components():
             from legal_rag.core.llmlingua_compressor import SimpleFallbackCompressor
             compressor = SimpleFallbackCompressor(target_ratio=config.compression_ratio)
 
-        rag_engine = LegalRAGEngine(
+        # Use Hugging Face instead of OpenAI (FREE)
+        rag_engine = HFLegalRAGEngine(
             vector_store=vector_store,
             compressor=compressor,
-            openai_model=config.openai_model,
-            top_k=config.top_k
+            top_k=config.top_k,
+            hf_token=os.getenv("HF_TOKEN")  # Optional - for higher rate limits
         )
 
         components.update({
@@ -68,8 +69,7 @@ async def lifespan(app: FastAPI):
     """Startup and shutdown events."""
     # Create upload directory
     Path("./uploads").mkdir(exist_ok=True)
-    # Initialize components
-    get_components()
+    # Don't initialize components at startup - do it lazily
     yield
     # Cleanup
     components.clear()
@@ -87,7 +87,7 @@ app.add_middleware(
 )
 
 # Serve static files
-# Get the web directory path
+# Get the web directory path (sibling of api/ folder)
 WEB_DIR = Path(__file__).parent.parent / "web"
 app.mount("/static", StaticFiles(directory=WEB_DIR), name="static")
 
@@ -100,6 +100,12 @@ class QueryResponse(BaseModel):
     answer: str
     sources: list[dict]
     token_stats: dict
+
+
+@app.get("/health")
+async def health_check():
+    """Health check endpoint for Render."""
+    return {"status": "healthy"}
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -202,4 +208,5 @@ async def compare_cases(case1: str = Form(...), case2: str = Form(...)):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
