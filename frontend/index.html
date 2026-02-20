@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Document RAG System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Legal Document RAG System</h1>
+            <p class="subtitle">AI-Powered Legal Document Analysis with Compressed Prompts</p>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="query">Query</button>
+            <button class="tab-btn" data-tab="upload">Upload</button>
+            <button class="tab-btn" data-tab="analyze">Analyze Case</button>
+            <button class="tab-btn" data-tab="compare">Compare Cases</button>
+            <button class="tab-btn" data-tab="stats">Stats</button>
+        </nav>
+
+        <main>
+            <!-- Query Tab -->
+            <section id="query" class="tab-content active">
+                <div class="card">
+                    <h2>Ask a Legal Question</h2>
+                    <div class="input-group">
+                        <textarea id="question-input" placeholder="Enter your legal question here... (e.g., What constitutional rights were established in Miranda v. Arizona?)"></textarea>
+                        <button id="query-btn" class="btn-primary">Ask Question</button>
+                    </div>
+                    <div id="query-loading" class="loading hidden">
+                        <div class="spinner"></div>
+                        <span>Processing your question...</span>
+                    </div>
+                    <div id="query-result" class="result hidden">
+                        <div class="result-header">
+                            <h3>Answer</h3>
+                            <span id="token-stats" class="token-badge"></span>
+                        </div>
+                        <div id="answer-content" class="answer-box"></div>
+                        <div id="sources-section" class="sources-box">
+                            <h4>Sources</h4>
+                            <ul id="sources-list"></ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Upload Tab -->
+            <section id="upload" class="tab-content">
+                <div class="card">
+                    <h2>Upload Legal Document</h2>
+                    <div class="upload-area" id="upload-area">
+                        <div class="upload-icon">&#128196;</div>
+                        <p>Drag & drop your file here or click to browse</p>
+                        <p class="file-types">Supported: PDF, DOCX, TXT</p>
+                        <input type="file" id="file-input" accept=".pdf,.docx,.txt" hidden>
+                    </div>
+                    <div id="upload-loading" class="loading hidden">
+                        <div class="spinner"></div>
+                        <span>Processing document...</span>
+                    </div>
+                    <div id="upload-result" class="result hidden"></div>
+                </div>
+            </section>
+
+            <!-- Analyze Tab -->
+            <section id="analyze" class="tab-content">
+                <div class="card">
+                    <h2>Analyze a Case</h2>
+                    <div class="input-group">
+                        <input type="text" id="case-name-input" placeholder="Enter case name (e.g., Miranda v. Arizona)">
+                        <button id="analyze-btn" class="btn-primary">Analyze Case</button>
+                    </div>
+                    <div id="analyze-loading" class="loading hidden">
+                        <div class="spinner"></div>
+                        <span>Analyzing case...</span>
+                    </div>
+                    <div id="analyze-result" class="result hidden">
+                        <div class="result-header">
+                            <h3>Case Analysis</h3>
+                            <span id="analyze-token-stats" class="token-badge"></span>
+                        </div>
+                        <div id="analyze-answer" class="answer-box"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Compare Tab -->
+            <section id="compare" class="tab-content">
+                <div class="card">
+                    <h2>Compare Two Cases</h2>
+                    <div class="compare-inputs">
+                        <input type="text" id="case1-input" placeholder="First case (e.g., Miranda v. Arizona)">
+                        <span class="vs">VS</span>
+                        <input type="text" id="case2-input" placeholder="Second case (e.g., Brown v. Board)">
+                    </div>
+                    <button id="compare-btn" class="btn-primary">Compare Cases</button>
+                    <div id="compare-loading" class="loading hidden">
+                        <div class="spinner"></div>
+                        <span>Comparing cases...</span>
+                    </div>
+                    <div id="compare-result" class="result hidden">
+                        <div class="result-header">
+                            <h3>Case Comparison</h3>
+                            <span id="compare-token-stats" class="token-badge"></span>
+                        </div>
+                        <div id="compare-answer" class="answer-box"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Tab -->
+            <section id="stats" class="tab-content">
+                <div class="card">
+                    <h2>Collection Statistics</h2>
+                    <button id="refresh-stats" class="btn-secondary">Refresh Stats</button>
+                    <div id="stats-content" class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Collection Name</span>
+                            <span id="stat-name" class="stat-value">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Documents</span>
+                            <span id="stat-count" class="stat-value">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Storage Path</span>
+                            <span id="stat-path" class="stat-value">-</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Legal Document RAG System with Compressed Prompts</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
