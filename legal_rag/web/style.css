@@ -328,6 +328,7 @@ footer {
     padding: 16px;
     border-radius: 8px;
     margin-top: 12px;
+    border-left: 4px solid #10b981;
 }
 
 .error-message {
@@ -336,6 +337,12 @@ footer {
     padding: 16px;
     border-radius: 8px;
     margin-top: 12px;
+    border-left: 4px solid #ef4444;
+}
+
+.error-message strong {
+    display: block;
+    margin-bottom: 4px;
 }
 
 @media (max-width: 600px) {
